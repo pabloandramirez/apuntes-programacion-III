@@ -934,6 +934,196 @@ const sections = [
       },
     ],
   },
+  {
+    id: "ejercicios",
+    number: "17",
+    title: "Ejercicios prácticos",
+    color: "#22c55e",
+    content: [
+
+      {
+        type: "subtitle",
+        text: "IPv4 y Subnetting"
+      },
+
+      {
+        type: "exercise",
+        question: "Dada la IP 192.168.10.34/27 calcular:",
+        items: [
+          "Dirección de red",
+          "Broadcast",
+          "Primer host útil",
+          "Último host útil",
+          "Cantidad de hosts utilizables"
+        ]
+      },
+
+      {
+        type: "exercise",
+        question: "Convertir la dirección 172.16.5.200 a binario."
+      },
+
+      {
+        type: "exercise",
+        question: "¿Cuál es la máscara correspondiente al prefijo /26?"
+      },
+
+      {
+        type: "exercise",
+        question: "¿Las IPs 192.168.1.10/24 y 192.168.2.15/24 pertenecen a la misma red? Justificar."
+      },
+
+      {
+        type: "exercise",
+        question: "Calcular cuántos hosts útiles tiene una red /29."
+      },
+
+      {
+        type: "exercise",
+        question: "Determinar si la IP 10.15.20.30 pertenece a un rango privado o público."
+      },
+
+      {
+        type: "subtitle",
+        text: "Modelo OSI y Protocolos"
+      },
+
+      {
+        type: "exercise",
+        question: "¿En qué capa OSI trabajan los siguientes dispositivos?",
+        items: [
+          "Router",
+          "Switch",
+          "Firewall",
+          "Access Point"
+        ]
+      },
+
+      {
+        type: "exercise",
+        question: "Clasificar los siguientes protocolos según la capa correspondiente:",
+        items: [
+          "HTTP",
+          "TCP",
+          "IP",
+          "Ethernet",
+          "DNS",
+          "UDP"
+        ]
+      },
+
+      {
+        type: "exercise",
+        question: "Ordenar correctamente las unidades de datos desde capa 7 hasta capa 1.",
+        items: [
+          "Bits",
+          "Segmento",
+          "Paquete",
+          "Trama"
+        ]
+      },
+
+      {
+        type: "exercise",
+        question: "Explicar la diferencia principal entre TCP y UDP."
+      },
+
+      {
+        type: "exercise",
+        question: "¿Qué función cumple el TTL en un paquete IP?"
+      },
+
+      {
+        type: "subtitle",
+        text: "Switching y Routing"
+      },
+
+      {
+        type: "exercise",
+        question: "Explicar qué ocurre cuando un switch recibe una trama cuya MAC destino no existe en la tabla CAM."
+      },
+
+      {
+        type: "exercise",
+        question: "¿Cuál es la diferencia entre una dirección MAC y una dirección IP?"
+      },
+
+      {
+        type: "exercise",
+        question: "¿Qué protocolo evita bucles en una topología redundante de switches?"
+      },
+
+      {
+        type: "exercise",
+        question: "Explicar brevemente qué hace un router cuando recibe un paquete."
+      },
+
+      {
+        type: "subtitle",
+        text: "Seguridad y Firewalls"
+      },
+
+      {
+        type: "exercise",
+        question: "¿Qué diferencia existe entre un firewall stateful y un packet filtering firewall?"
+      },
+
+      {
+        type: "exercise",
+        question: "Explicar el concepto de Zero Trust."
+      },
+
+      {
+        type: "exercise",
+        question: "¿Qué ventajas ofrece una DMZ dentro de una arquitectura de red?"
+      },
+
+      {
+        type: "subtitle",
+        text: "UX / UI"
+      },
+
+      {
+        type: "exercise",
+        question: "¿Qué diferencia existe entre UX y UI?"
+      },
+
+      {
+        type: "exercise",
+        question: "¿Qué ley UX se relaciona con reducir la cantidad de opciones en un menú?"
+      },
+
+      {
+        type: "exercise",
+        question: "Explicar la diferencia entre un wireframe y un mockup."
+      },
+
+      {
+        type: "exercise",
+        question: "Mencionar dos principios de Gestalt y dar un ejemplo práctico."
+      },
+
+      {
+        type: "exercise",
+        question: "¿Por qué la consistencia visual es importante en una interfaz?"
+      },
+
+      {
+        type: "subtitle",
+        text: "Casos prácticos"
+      },
+
+      {
+        type: "exercise",
+        question: "Un usuario tiene conexión WiFi pero no puede acceder a Internet. Enumerar los pasos básicos de diagnóstico siguiendo el modelo OSI."
+      },
+
+      {
+        type: "exercise",
+        question: "Una empresa necesita separar administrativamente las áreas de ventas y recursos humanos dentro de la misma red física. ¿Qué tecnología podría utilizarse?"
+      }
+    ]
+  }
 ];
 
 
@@ -952,22 +1142,22 @@ export default function App() {
 
       {/* Main content */}
       <main className={styles.content}>
-          {/* Header */}
-          <SectionHeader current={current} total={sections.length} />
+        {/* Header */}
+        <SectionHeader current={current} total={sections.length} />
 
-          {/* Content blocks */}
-          <div>
-            {current?.content.map((item, idx) => (
-              <BlockRenderer key={idx} item={item} />
-            ))}
-          </div>
+        {/* Content blocks */}
+        <div>
+          {current?.content.map((item, idx) => (
+            <BlockRenderer key={idx} item={item} index={idx} />
+          ))}
+        </div>
 
-          {/* Navigation */}
-          <Navigation
-            sections={sections}
-            active={active}
-            setActive={setActive}
-          />
+        {/* Navigation */}
+        <Navigation
+          sections={sections}
+          active={active}
+          setActive={setActive}
+        />
       </main>
     </div>
   );

@@ -29,7 +29,10 @@ export default function Sidebar({ sections, active, setActive }) {
                 {sections.map((s) => (
                     <button
                         key={s.id}
-                        onClick={() => setActive(s.id)}
+                        onClick={() => {
+                            setActive(s.id);
+                            setMenuOpen(false);
+                        }}
                         className={`${styles.button} ${active === s.id ? styles.buttonActive : ""
                             }`}
                         style={{
