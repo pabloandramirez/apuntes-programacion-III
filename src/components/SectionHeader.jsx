@@ -1,13 +1,13 @@
 import styles from "../styles/sectionHeader.module.css";
 
-export default function SectionHeader({ current, length }) {
+export default function SectionHeader({ current, total }) {
   return (
     <div className={styles.container}>
       <div
         className={styles.number}
         style={{ color: current?.color }}
       >
-        {current?.number} / {String(length).padStart(2, "0")}
+        {current?.number} / {String(total).padStart(2, "0")}
       </div>
 
       <h1 className={styles.title}>
