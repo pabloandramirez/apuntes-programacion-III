@@ -1,4 +1,9 @@
 import { useState } from "react";
+import Sidebar from "./Sidebar";
+import BlockRenderer from "./BlockRenderer";
+import SectionHeader from "./SectionHeader";
+import Navigation from "./Navigation";
+import styles from "../styles/home.module.css"
 
 const sections = [
   {
@@ -74,13 +79,13 @@ const sections = [
         type: "table",
         headers: ["Dispositivo", "Capa OSI", "Función principal"],
         rows: [
-            ["Access Point", "Capa 1–2", "Puente entre red inalámbrica y cableada"],
-            ["Switch", "Capa 2", "Conmutación por direcciones MAC dentro de una LAN"],
-            ["Router", "Capa 3", "Enrutamiento por direcciones IP entre redes"],
-            ["Firewall", "Capa 3–7", "Filtrado e inspección de tráfico según reglas de seguridad"],
-            ["Gateway", "Capa 3–7", "Interconexión o traducción entre redes y protocolos distintos"],
-            ["Balanceador de carga", "Capa 4–7", "Distribución de tráfico entre múltiples servidores"],
-            ],
+          ["Access Point", "Capa 1–2", "Puente entre red inalámbrica y cableada"],
+          ["Switch", "Capa 2", "Conmutación por direcciones MAC dentro de una LAN"],
+          ["Router", "Capa 3", "Enrutamiento por direcciones IP entre redes"],
+          ["Firewall", "Capa 3–7", "Filtrado e inspección de tráfico según reglas de seguridad"],
+          ["Gateway", "Capa 3–7", "Interconexión o traducción entre redes y protocolos distintos"],
+          ["Balanceador de carga", "Capa 4–7", "Distribución de tráfico entre múltiples servidores"],
+        ],
       },
     ],
   },
@@ -460,7 +465,7 @@ const sections = [
         rows: [
           ["192", "11000000"],
           ["168", "10101000"],
-          ["1",   "00000001"],
+          ["1", "00000001"],
           ["100", "01100100"],
         ],
       },
@@ -506,14 +511,14 @@ const sections = [
         type: "table",
         headers: ["Prefijo", "Máscara", "Bits de host", "Total hosts", "Hosts útiles"],
         rows: [
-          ["/8",  "255.0.0.0",       "24", "16.777.216", "16.777.214"],
-          ["/16", "255.255.0.0",     "16", "65.536",      "65.534"],
-          ["/24", "255.255.255.0",   "8",  "256",         "254"],
-          ["/25", "255.255.255.128", "7",  "128",         "126"],
-          ["/26", "255.255.255.192", "6",  "64",          "62"],
-          ["/29", "255.255.255.248", "3",  "8",           "6"],
-          ["/30", "255.255.255.252", "2",  "4",           "2"],
-          ["/32", "255.255.255.255", "0",  "1",           "1 (host único)"],
+          ["/8", "255.0.0.0", "24", "16.777.216", "16.777.214"],
+          ["/16", "255.255.0.0", "16", "65.536", "65.534"],
+          ["/24", "255.255.255.0", "8", "256", "254"],
+          ["/25", "255.255.255.128", "7", "128", "126"],
+          ["/26", "255.255.255.192", "6", "64", "62"],
+          ["/29", "255.255.255.248", "3", "8", "6"],
+          ["/30", "255.255.255.252", "2", "4", "2"],
+          ["/32", "255.255.255.255", "0", "1", "1 (host único)"],
         ],
       },
       {
@@ -538,9 +543,9 @@ const sections = [
         type: "table",
         headers: ["Clase", "Prefijo", "Rango", "Hosts por red", "Uso típico"],
         rows: [
-          ["A", "/8",  "1.0.0.0 – 126.0.0.0",     "~16,7 millones", "ISPs gigantes, grandes corporaciones"],
-          ["B", "/16", "128.0.0.0 – 191.255.0.0",  "~65.534",        "Universidades, organizaciones medianas"],
-          ["C", "/24", "192.0.0.0 – 223.255.255.0","254",             "Redes domésticas y pequeñas empresas"],
+          ["A", "/8", "1.0.0.0 – 126.0.0.0", "~16,7 millones", "ISPs gigantes, grandes corporaciones"],
+          ["B", "/16", "128.0.0.0 – 191.255.0.0", "~65.534", "Universidades, organizaciones medianas"],
+          ["C", "/24", "192.0.0.0 – 223.255.255.0", "254", "Redes domésticas y pequeñas empresas"],
         ],
       },
       {
@@ -569,9 +574,9 @@ const sections = [
         type: "table",
         headers: ["Rango", "Prefijo", "Clase", "Hosts disponibles", "Uso típico"],
         rows: [
-          ["10.0.0.0 – 10.255.255.255",     "/8",  "A", "~16,7 millones", "Grandes empresas, data centers"],
-          ["172.16.0.0 – 172.31.255.255",   "/12", "B", "~1 millón",      "Empresas medianas"],
-          ["192.168.0.0 – 192.168.255.255", "/16", "C", "~65.534",        "Redes domésticas y SOHO"],
+          ["10.0.0.0 – 10.255.255.255", "/8", "A", "~16,7 millones", "Grandes empresas, data centers"],
+          ["172.16.0.0 – 172.31.255.255", "/12", "B", "~1 millón", "Empresas medianas"],
+          ["192.168.0.0 – 192.168.255.255", "/16", "C", "~65.534", "Redes domésticas y SOHO"],
         ],
       },
       {
@@ -582,10 +587,10 @@ const sections = [
         headers: ["Dirección / Rango", "Propósito"],
         rows: [
           ["127.0.0.0/8 (típico: 127.0.0.1)", "Loopback: apunta a la propia máquina. Nunca sale a la red."],
-          ["0.0.0.0",                          "Dirección de red mínima / ruta por defecto."],
-          ["255.255.255.255",                  "Broadcast limitado: se envía a todos los dispositivos de la red local."],
-          ["169.254.0.0/16",                   "APIPA: asignada automáticamente cuando no hay servidor DHCP."],
-          ["224.0.0.0 – 239.255.255.255",      "Multicast: envío a un grupo específico de dispositivos."],
+          ["0.0.0.0", "Dirección de red mínima / ruta por defecto."],
+          ["255.255.255.255", "Broadcast limitado: se envía a todos los dispositivos de la red local."],
+          ["169.254.0.0/16", "APIPA: asignada automáticamente cuando no hay servidor DHCP."],
+          ["224.0.0.0 – 239.255.255.255", "Multicast: envío a un grupo específico de dispositivos."],
         ],
       },
       {
@@ -932,135 +937,38 @@ const sections = [
 ];
 
 
-function Block({ item }) {
-  if (item.type === "definition") {
-    return (
-      <div style={{ borderLeft: "3px solid #fff3", padding: "12px 16px", marginBottom: 14, background: "rgba(255,255,255,0.04)", borderRadius: "0 8px 8px 0" }}>
-        <div style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: "#888", marginBottom: 4 }}>Definición</div>
-        <span style={{ color: "#e8e8e8", fontWeight: 700 }}>{item.term}: </span>
-        <span style={{ color: "#bbb", lineHeight: 1.6 }}>{item.text}</span>
-      </div>
-    );
-  }
-  if (item.type === "callout") {
-    return (
-      <div style={{ border: "1px solid rgba(255,200,0,0.25)", background: "rgba(255,200,0,0.05)", borderRadius: 8, padding: "12px 16px", marginBottom: 14, display: "flex", gap: 10 }}>
-        <span style={{ fontSize: 18, lineHeight: 1 }}>⚠</span>
-        <span style={{ color: "#ddd", fontSize: 13, lineHeight: 1.6 }}>{item.text}</span>
-      </div>
-    );
-  }
-  if (item.type === "text") {
-    return <p style={{ color: "#bbb", lineHeight: 1.7, marginBottom: 12, fontSize: 14 }}>{item.text}</p>;
-  }
-  if (item.type === "subtitle") {
-    return <h3 style={{ color: "#fff", fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", marginTop: 20, marginBottom: 10, opacity: 0.85 }}>{item.text}</h3>;
-  }
-  if (item.type === "list") {
-    return (
-      <ul style={{ margin: "0 0 14px 0", padding: 0, listStyle: "none" }}>
-        {item.items.map((i, idx) => (
-          <li key={idx} style={{ color: "#bbb", fontSize: 13, lineHeight: 1.7, paddingLeft: 18, position: "relative", marginBottom: 4 }}>
-            <span style={{ position: "absolute", left: 0, color: "#555" }}>›</span>
-            {i}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-  if (item.type === "steps") {
-    return (
-      <ol style={{ margin: "0 0 14px 0", padding: 0, listStyle: "none" }}>
-        {item.items.map((i, idx) => (
-          <li key={idx} style={{ display: "flex", gap: 12, marginBottom: 8, alignItems: "flex-start" }}>
-            <span style={{ minWidth: 22, height: 22, background: "rgba(255,255,255,0.08)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, color: "#aaa", fontWeight: 700, flexShrink: 0, marginTop: 1 }}>{idx + 1}</span>
-            <span style={{ color: "#bbb", fontSize: 13, lineHeight: 1.6 }}>{i}</span>
-          </li>
-        ))}
-      </ol>
-    );
-  }
-  if (item.type === "table") {
-    return (
-      <div style={{ overflowX: "auto", marginBottom: 16 }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
-          <thead>
-            <tr>
-              {item.headers.map((h, i) => (
-                <th key={i} style={{ textAlign: "center", padding: "8px 12px", color: "#888", fontWeight: 600, letterSpacing: 0.8, textTransform: "uppercase", fontSize: 11, borderBottom: "1px solid rgba(255,255,255,0.08)", whiteSpace: "nowrap" }}>{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {item.rows.map((row, ri) => (
-              <tr key={ri} style={{ background: ri % 2 === 0 ? "transparent" : "rgba(255,255,255,0.02)" }}>
-                {row.map((cell, ci) => (
-                  <td key={ci} style={{ padding: "8px 12px", color: ci === 0 ? "#e0e0e0" : "#aaa", borderBottom: "1px solid rgba(255,255,255,0.04)", lineHeight: 1.5, verticalAlign: "top" }}>{cell}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-  return null;
-}
-
 export default function App() {
   const [active, setActive] = useState("intro");
   const current = sections.find(s => s.id === active);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0e0e10", color: "#fff", fontFamily: "'Georgia', 'Times New Roman', serif", display: "flex" }}>
+    <div className={styles.app}>
       {/* Sidebar */}
-      <div style={{ width: 220, flexShrink: 0, borderRight: "1px solid rgba(255,255,255,0.06)", padding: "32px 0", display: "flex", flexDirection: "column", gap: 2, position: "sticky", top: 0, height: "100vh", overflowY: "auto" }}>
-        <div style={{ padding: "0 20px 24px", borderBottom: "1px solid rgba(255,255,255,0.06)", marginBottom: 8 }}>
-          <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: "#555", marginBottom: 4 }}>Apuntes</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#fff", lineHeight: 1.3 }}>Redes de<br />Computadoras</div>
-        </div>
-        {sections.map(s => (
-          <button key={s.id} onClick={() => setActive(s.id)} style={{ background: active === s.id ? "rgba(255,255,255,0.06)" : "transparent", border: "none", cursor: "pointer", padding: "10px 20px", textAlign: "left", display: "flex", alignItems: "center", gap: 10, transition: "background 0.15s", borderLeft: active === s.id ? `2px solid ${s.color}` : "2px solid transparent" }}>
-            <span style={{ fontSize: 10, fontFamily: "monospace", color: active === s.id ? s.color : "#444", fontWeight: 700 }}>{s.number}</span>
-            <span style={{ fontSize: 12, color: active === s.id ? "#fff" : "#666", lineHeight: 1.3 }}>{s.title}</span>
-          </button>
-        ))}
-      </div>
+      <Sidebar
+        sections={sections}
+        active={active}
+        setActive={setActive}
+      />
 
       {/* Main content */}
-      <div style={{ flex: 1, overflowY: "auto" }}>
-        <div style={{ maxWidth: 820, margin: "0 auto", padding: "48px 40px" }}>
+      <main className={styles.content}>
           {/* Header */}
-          <div style={{ marginBottom: 36 }}>
-            <div style={{ fontSize: 11, letterSpacing: 3, textTransform: "uppercase", color: current?.color, marginBottom: 8, fontFamily: "monospace" }}>
-              {current?.number} / {String(sections.length).padStart(2, "0")}
-            </div>
-            <h1 style={{ fontSize: 32, fontWeight: 700, margin: 0, color: "#fff", letterSpacing: -0.5 }}>{current?.title}</h1>
-            <div style={{ height: 2, width: 40, background: current?.color, marginTop: 14, borderRadius: 2 }} />
-          </div>
+          <SectionHeader current={current} total={sections.length} />
 
           {/* Content blocks */}
           <div>
             {current?.content.map((item, idx) => (
-              <Block key={idx} item={item} />
+              <BlockRenderer key={idx} item={item} />
             ))}
           </div>
 
           {/* Navigation */}
-          <div style={{ display: "flex", justifyContent: "space-between", marginTop: 48, paddingTop: 24, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-            {sections.findIndex(s => s.id === active) > 0 ? (
-              <button onClick={() => setActive(sections[sections.findIndex(s => s.id === active) - 1].id)} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#aaa", padding: "8px 16px", borderRadius: 6, cursor: "pointer", fontSize: 12 }}>
-                ← Anterior
-              </button>
-            ) : <div />}
-            {sections.findIndex(s => s.id === active) < sections.length - 1 ? (
-              <button onClick={() => setActive(sections[sections.findIndex(s => s.id === active) + 1].id)} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#aaa", padding: "8px 16px", borderRadius: 6, cursor: "pointer", fontSize: 12 }}>
-                Siguiente →
-              </button>
-            ) : <div />}
-          </div>
-        </div>
-      </div>
+          <Navigation
+            sections={sections}
+            active={active}
+            setActive={setActive}
+          />
+      </main>
     </div>
   );
 }

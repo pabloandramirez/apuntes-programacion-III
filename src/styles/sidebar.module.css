@@ -1,0 +1,116 @@
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.header {
+  padding: 0 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 8px;
+}
+
+.label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.15s;
+  border-left: 2px solid transparent;
+}
+
+.button:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.buttonActive {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.number {
+  font-size: 10px;
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.buttonTitle {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.3;
+}
+
+.buttonTitleActive {
+  color: #fff;
+}
+
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+  .sidebar {
+    width: 190px;
+  }
+
+  .button {
+    padding: 10px 16px;
+  }
+
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 16px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .header {
+    padding: 0 16px 16px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .button {
+    padding: 12px 16px;
+    min-width: 160px;
+    flex-shrink: 0;
+  }
+
+}

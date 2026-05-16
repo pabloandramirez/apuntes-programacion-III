@@ -1,0 +1,42 @@
+.wrapper {
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.header {
+  text-align: center;
+  padding: 8px 12px;
+  color: #888;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-size: 11px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+.row {
+  background: transparent;
+}
+
+.rowAlt {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.cell {
+  padding: 8px 12px;
+  color: #aaa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.firstCell {
+  color: #e0e0e0;
+}
