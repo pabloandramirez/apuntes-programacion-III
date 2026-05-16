@@ -1,4 +1,4 @@
-import styles from "../../styles/blocks/calloutBlock.module.css";
+import styles from "../../styles/blocks/callOutBlock.module.css";
 
 export default function CalloutBlock({ item }) {
     return (
