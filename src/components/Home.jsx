@@ -1123,7 +1123,14 @@ const sections = [
         question: "Una empresa necesita separar administrativamente las áreas de ventas y recursos humanos dentro de la misma red física. ¿Qué tecnología podría utilizarse?"
       }
     ]
-  }
+  },
+  {
+    id: "ejerciciosSubnetLab",
+    number: "18",
+    title: "Ejercicios – SubnetLab",
+    color: "#c8ff00",
+    content: [{ type: "tool" }],
+  },
 ];
 
 

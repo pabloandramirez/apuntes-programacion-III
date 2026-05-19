@@ -6,6 +6,7 @@ import StepsBlock from "./blocks/StepsBlock";
 import SubtitleBlock from "./blocks/SubtitleBlock";
 import TableBlock from "./blocks/TableBlock";
 import TextBlock from "./blocks/TextBlock";
+import SubNetLab from "./subNetLab/SubNetLab";
 
 export default function BlockRenderer({ item, index }) {
     switch (item.type) {
@@ -32,6 +33,9 @@ export default function BlockRenderer({ item, index }) {
 
     case "exercise":
       return <ExerciseBlock item={item} index={index} />;
+
+    case "tool":
+      return <SubNetLab item={item} index={index} />;
 
     default:
       return null;
