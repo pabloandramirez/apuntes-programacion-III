@@ -1131,6 +1131,193 @@ const sections = [
     color: "#c8ff00",
     content: [{ type: "tool" }],
   },
+  {
+    id: "react-native",
+    number: "19",
+    title: "React Native – Introducción",
+    color: "#61dafb",
+    content: [
+      {
+        type: "definition",
+        term: "React Native",
+        text: "Framework de código abierto creado por Facebook (Meta), lanzado en 2015. Permite construir aplicaciones móviles multiplataforma (iOS y Android) desde una única base de código JavaScript o TypeScript, usando el mismo modelo de componentes de React.",
+      },
+      {
+        type: "subtitle", text: "Palabras clave"
+      },
+      {
+        type: "table",
+        headers: ["Concepto", "Significado"],
+        rows: [
+          ["Cross-platform", "Un solo código fuente para iOS y Android."],
+          ["Nativo", "No usa WebView como Ionic. Interactúa con los componentes reales del SO (cámara, GPS, sensores, Face ID)."],
+          ["Declarativo", "Describe cómo debe verse la UI según el estado actual."],
+          ["Basado en React", "Reutiliza todos los conceptos de React: componentes, props, estado, hooks."],
+          ["Bridge / Puente nativo", "Capa que comunica el hilo de JavaScript con los módulos nativos del SO."],
+          ["JSX", "Sintaxis que mezcla JavaScript y XML para describir la interfaz. Archivos .jsx / .tsx"],
+        ],
+      },
+      {
+        type: "subtitle", text: "¿Cómo funciona internamente?"
+      },
+      {
+        type: "steps",
+        items: [
+          "El código fuente JavaScript/TypeScript corre en un hilo propio (JS thread).",
+          "Cuando necesita actualizar la UI, se comunica con el SO a través del puente nativo (Bridge).",
+          "En Android: el código se transpila a Java / Kotlin.",
+          "En iOS: el código se transpila a Swift / Objective-C.",
+          "La interfaz gráfica se genera con componentes nativos del SO, NO con HTML ni CSS.",
+        ],
+      },
+      {
+        type: "callout",
+        text: "A diferencia de Ionic (que emula un navegador web dentro de la app), React Native usa componentes 100% nativos del sistema operativo. Eso le da mucho mejor rendimiento y acceso a sensores, autenticación biométrica, notificaciones, etc.",
+      },
+      {
+        type: "subtitle", text: "Comparativa con otras tecnologías"
+      },
+      {
+        type: "table",
+        headers: ["Tecnología", "Lenguaje", "Tipo", "Observación"],
+        rows: [
+          ["React Native", "JavaScript / TypeScript", "Nativo multiplataforma", "Comparte código entre iOS y Android. Comunidad enorme."],
+          ["Flutter", "Dart", "Nativo multiplataforma", "Motor de renderizado propio. Curva de aprendizaje diferente."],
+          ["Ionic", "HTML + CSS + JS", "Híbrida (WebView)", "Muy rápido de montar, pero bajo rendimiento."],
+          ["Kotlin", "Kotlin / Java", "Nativo Android puro", "Máximo rendimiento en Android, solo Android."],
+          ["Swift / SwiftUI", "Swift", "Nativo iOS puro", "Máximo rendimiento en iOS, solo iOS."],
+          [".NET MAUI", "C#", "Multiplataforma", "Ecosistema Microsoft. Soporta desktop, móvil y web."],
+        ],
+      },
+      {
+        type: "subtitle", text: "Ventajas de React Native"
+      },
+      {
+        type: "list",
+        items: [
+          "Un solo equipo de desarrollo para ambas plataformas → ahorro de tiempo y costo.",
+          "Reutiliza conocimiento de React web.",
+          "Comunidad enorme → miles de librerías en NPM, muchas soluciones ya resueltas.",
+          "Fast Refresh: al guardar un cambio, la app se recarga en tiempo real sin perder estado.",
+          "Acceso nativo a GPS, cámara, notificaciones, biometría, sensores.",
+          "Expo simplifica enormemente el entorno de desarrollo (sin necesidad de Android Studio ni Xcode para empezar).",
+        ],
+      },
+      {
+        type: "subtitle", text: "Desventajas a tener en cuenta"
+      },
+      {
+        type: "list",
+        items: [
+          "El rendimiento es muy bueno, pero no idéntico al 100% nativo (Kotlin / Swift).",
+          "Algunas funcionalidades muy específicas del hardware pueden requerir escribir código nativo.",
+          "El emulador consume muchos recursos: mínimo 16 GB RAM recomendado, idealmente 32 GB.",
+          "Para publicar en iOS se necesita una Mac (o Mac Mini) para compilar.",
+        ],
+      },
+      {
+        type: "callout",
+        text: "Para publicar en Play Store (Android): pago único de ~$25, menos restricciones. Para App Store (iOS): $99/año, revisión manual de cada versión que puede tardar días o semanas.",
+      },
+    ],
+  },
+  {
+    id: "react-native-setup",
+    number: "20",
+    title: "React Native – Entorno y estructura",
+    color: "#f97316 ",
+    content: [
+      {
+        type: "subtitle", text: "Herramientas necesarias"
+      },
+      {
+        type: "table",
+        headers: ["Herramienta", "Para qué sirve", "Instalación"],
+        rows: [
+          ["NVM (Node Version Manager)", "Gestiona múltiples versiones de Node.js. Permite cambiar de versión por proyecto.", "nvm.sh (Linux/Mac) o nvm-windows"],
+          ["Node.js (LTS)", "Runtime de JavaScript. Se instala a través de NVM.", "nvm install --lts"],
+          ["Git", "Control de versiones. Windows no lo trae por defecto.", "git-scm.com"],
+          ["Visual Studio Code", "Editor de código ligero con excelente soporte para JS/TS/React.", "code.visualstudio.com"],
+          ["Expo Go", "App móvil que permite probar tu app escaneando un QR, sin compilar.", "Play Store / App Store"],
+          ["Android Studio", "Necesario solo si vas a usar el emulador en la computadora.", "developer.android.com"],
+        ],
+      },
+      {
+        type: "subtitle", text: "Extensiones recomendadas para VS Code"
+      },
+      {
+        type: "list",
+        items: [
+          "ESLint: analiza el código en busca de errores y malas prácticas antes de ejecutar.",
+          "Prettier: formatea el código automáticamente al guardar (tabulación, comillas, punto y coma). Esencial en equipos para que todos tengan el mismo estilo y Git no marque cambios falsos.",
+          "React Native Tools: depuración y soporte específico para React Native.",
+        ],
+      },
+      {
+        type: "subtitle", text: "Crear un proyecto con Expo"
+      },
+      {
+        type: "steps",
+        items: [
+          "Verificar Node instalado: node -v (recomendado v22 LTS o superior).",
+          "Crear el proyecto: npx create-expo-app@latest nombre-del-proyecto",
+          "Ingresar a la carpeta: cd nombre-del-proyecto",
+          "Iniciar el servidor de desarrollo: npx expo start",
+          "Aparece un código QR en la terminal. Escanearlo con Expo Go desde el celular (misma red WiFi).",
+          "El celular mostrará la app en tiempo real. Cualquier cambio guardado se refleja al instante (Fast Refresh).",
+        ],
+      },
+      {
+        type: "callout",
+        text: "⚠ El celular y la computadora deben estar en la misma red WiFi. Si cambiás de red (ej: de casa a la facultad), Expo pierde la conexión y hay que reiniciar. Para datos móviles no funciona por defecto.",
+      },
+      {
+        type: "subtitle", text: "Estructura de carpetas de un proyecto Expo"
+      },
+      {
+        type: "table",
+        headers: ["Carpeta / Archivo", "Contenido"],
+        rows: [
+          ["app/", "Pantallas y navegación principal de la aplicación."],
+          ["assets/", "Imágenes, fuentes y otros recursos estáticos."],
+          ["components/", "Componentes reutilizables: botones, tarjetas, listas, etc."],
+          ["constants/", "Variables globales: paleta de colores, tipografías, URLs de APIs. Se exportan para usar en toda la app."],
+          ["hooks/", "Custom hooks de React (lógica reutilizable)."],
+          ["node_modules/", "Librerías de terceros instaladas. No se sube al repositorio."],
+          ["app.json", "Configuración global: nombre de la app, versión, ícono, orientación de pantalla, splash screen."],
+          [".gitignore", "Archivos que Git debe ignorar: node_modules, variables de entorno (.env), carpetas de build."],
+          [".env", "Variables de entorno locales (claves de API, URLs). NUNCA subir al repositorio."],
+        ],
+      },
+      {
+        type: "subtitle", text: "Expo Go vs compilación nativa"
+      },
+      {
+        type: "text",
+        text: "Expo Go permite probar rápido sin compilar, pero tiene limitaciones: no puede acceder a algunas APIs nativas (almacenamiento local del SO, módulos de bajo nivel). Cuando se necesitan esas funcionalidades, hay que compilar la app (EAS Build de Expo o Android Studio).",
+      },
+      {
+        type: "subtitle", text: "Sobre los cables USB para desarrollo"
+      },
+      {
+        type: "callout",
+        text: "Existen dos tipos de cables USB: cables de carga (solo energía) y cables de datos (energía + transferencia de datos). Para conectar el celular como dispositivo de desarrollo, el cable DEBE ser de datos. Muchos cables baratos son solo de carga.",
+      },
+      {
+        type: "subtitle", text: "Activar modo desarrollador en Android"
+      },
+      {
+        type: "steps",
+        items: [
+          "Ir a Ajustes → Información del teléfono → Información del software.",
+          "Tocar 7 veces sobre 'Número de compilación'.",
+          "Aparece el mensaje 'Ahora eres desarrollador'.",
+          "Volver a Ajustes → Opciones de desarrollador → Activar 'Depuración USB'.",
+          "Conectar el cable de datos y aceptar la solicitud de permisos en el teléfono.",
+        ],
+      },
+    ],
+  },
 ];
 
 
