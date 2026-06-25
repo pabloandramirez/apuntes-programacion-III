@@ -1499,6 +1499,259 @@ const sections = [
       },
     ],
   },
+  {
+    id: "react-native-arquitectura",
+    number: "22",
+    title: "React Native – Arquitectura interna profunda",
+    color: "#f97316",
+    content: [
+      {
+        type: "definition",
+        term: "UI = f(estado)",
+        text: "La interfaz de usuario es el resultado de una función aplicada al estado actual. Cuando el estado cambia, React vuelve a ejecutar esa función y actualiza solo lo necesario. No se manipula la pantalla directamente.",
+      },
+      {
+        type: "subtitle", text: "Imperativo vs Declarativo"
+      },
+      {
+        type: "table",
+        headers: ["Paradigma", "Descripción", "Ejemplo"],
+        rows: [
+          ["Imperativo", "Se dan instrucciones paso a paso. El programador maneja cada cambio a mano.", "DOM: getElementById → cambiar texto → actualizar contador"],
+          ["Declarativo", "Se describe el resultado final para un estado dado. React se encarga de llegar ahí.", "useState + JSX: describís cómo debe verse, React lo actualiza solo"],
+        ],
+      },
+      {
+        type: "callout",
+        text: "Analogía Excel: una celda con fórmula =A1*2 no se actualiza a mano — se actualiza sola cuando cambia A1. En React, el estado es A1 y la pantalla es la celda con la fórmula.",
+      },
+      {
+        type: "subtitle", text: "Componentes: recetas, no pintores"
+      },
+      {
+        type: "table",
+        headers: ["Analogía cocina", "React Native"],
+        rows: [
+          ["La receta escrita", "El componente (función que describe la UI)"],
+          ["Los ingredientes", "Props y estado actual del componente"],
+          ["Leer la receta", "Renderizar — produce una descripción, no dibuja nada todavía"],
+          ["Cocinar el plato", "Montar las vistas nativas — el costo real aparece acá"],
+        ],
+      },
+      {
+        type: "callout",
+        text: "Una receta se puede leer mil veces sin gastar comida. Un componente se puede ejecutar muchas veces sin tocar la pantalla. Por eso React puede re-renderizar seguido — es barato hasta el momento del mount.",
+      },
+      {
+        type: "subtitle", text: "Árbol de elementos"
+      },
+      {
+        type: "text",
+        text: "La app no es una sola pantalla — es un árbol donde cada componente devuelve elementos que contienen otros elementos, formando una jerarquía. React la recorre desde el componente raíz hacia los hijos.",
+      },
+      {
+        type: "table",
+        headers: ["Tipo", "Descripción", "Ejemplo"],
+        rows: [
+          ["Componente compuesto", "Componente propio que React ejecuta para ver qué devuelve.", "<Perfil /> → React lo ejecuta y obtiene más elementos"],
+          ["Componente host (primitivo)", "Elemento nativo que no se reduce más. Mapea directamente a una vista del SO.", "<View />, <Text />, <Image />"],
+        ],
+      },
+      {
+        type: "subtitle", text: "Virtual DOM / Árbol virtual en React Native"
+      },
+      {
+        type: "text",
+        text: "En la web, el Virtual DOM se compara con el DOM real del navegador. En React Native no existe DOM — hay un árbol virtual de elementos que termina alimentando a Fabric (el renderizador nativo). El principio es el mismo: mantener una copia liviana en memoria y calcular los cambios mínimos antes de tocar las vistas reales.",
+      },
+      {
+        type: "callout",
+        text: "Comparar dos árboles de objetos JavaScript en memoria es órdenes de magnitud más económico que destruir y recrear vistas nativas. React invierte poco cálculo en JS para ahorrar mucho trabajo costoso del lado nativo.",
+      },
+      {
+        type: "subtitle", text: "Reconciliación y algoritmo de Diffing"
+      },
+      {
+        type: "text",
+        text: "La reconciliación es el proceso por el cual React compara el árbol nuevo con el anterior y deduce la lista mínima de cambios necesarios para actualizar la UI.",
+      },
+      {
+        type: "list",
+        items: [
+          "Si cambió el tipo del componente (ej: View → Text): React destruye el anterior y crea uno nuevo con todo su subárbol.",
+          "Si es el mismo tipo: React conserva la vista y solo actualiza las propiedades que cambiaron.",
+          "El algoritmo es lineal (proporcional a la cantidad de elementos), no exponencial — eso lo hace viable.",
+        ],
+      },
+      {
+        type: "subtitle", text: "Keys en listas — por qué importan"
+      },
+      {
+        type: "text",
+        text: "Cuando se renderiza una lista, React necesita saber qué elemento corresponde a cuál entre dos renders. Sin una key única, puede asociar el estado equivocado a las filas equivocadas, generando parpadeos y comportamientos incorrectos.",
+      },
+      {
+        type: "callout",
+        text: "⚠ Nunca usar el índice del array como key si la lista puede reordenarse o insertarse al principio. Siempre usar un identificador único estable (ej: id de base de datos).",
+      },
+      {
+        type: "subtitle", text: "Fiber — el reconciliador moderno"
+      },
+      {
+        type: "definition",
+        term: "Fiber",
+        text: "Motor de reconciliación moderno de React (desde v16). Divide el trabajo de actualización en dos fases completamente separadas, lo que permite trabajar de forma interrumpible y priorizada.",
+      },
+      {
+        type: "table",
+        headers: ["Fase", "Qué hace", "¿Es interrumpible?"],
+        rows: [
+          ["Render", "Ejecuta componentes, arma el nuevo árbol, calcula el diff.", "Sí — sin efectos visibles para el usuario"],
+          ["Commit", "Aplica los cambios calculados a las vistas nativas. Rápido y sin interrupciones.", "No"],
+        ],
+      },
+      {
+        type: "subtitle", text: "Renderizado concurrente y prioridades"
+      },
+      {
+        type: "table",
+        headers: ["Prioridad", "Tipo de actualización", "Ejemplo"],
+        rows: [
+          ["Alta", "Responde a gestos del usuario", "Tap, swipe, scroll"],
+          ["Baja", "Cálculo pesado o datos que llegan del servidor", "Listener de base de datos en tiempo real"],
+        ],
+      },
+      {
+        type: "subtitle", text: "Hooks por dentro — cómo useState recuerda"
+      },
+      {
+        type: "text",
+        text: "Un componente es una función que se ejecuta desde cero en cada render. React guarda los hooks en una lista ordenada asociada al componente, fuera de la función. No sabe el nombre de la variable — sabe su posición en la lista.",
+      },
+      {
+        type: "steps",
+        items: [
+          "Primer render: React reserva espacio para el hook en posición 0, guarda el valor inicial ('Sofia'), devuelve ese valor y la función setName.",
+          "Se llama setName('Pablo'): React anota el nuevo valor y agenda un re-render.",
+          "Siguiente render: la función se ejecuta de nuevo. Al llegar al hook 0, React no usa el inicial sino el anotado ('Pablo').",
+          "La función 'olvidó' todo al ejecutarse, pero React recordó el estado a través de la lista de hooks.",
+        ],
+      },
+      {
+        type: "callout",
+        text: "Regla de oro: nunca llamar hooks dentro de condicionales (if) ni bucles (for). El orden de llamada debe ser idéntico en cada render — el orden ES la identidad del hook.",
+      },
+      {
+        type: "subtitle", text: "useEffect — efectos secundarios"
+      },
+      {
+        type: "definition",
+        term: "useEffect",
+        text: "Permite ejecutar código que habla con el mundo exterior (APIs, sensores, eventos de hardware, suscripciones) después de que React ya pintó la interfaz. Corre en la fase de commit, no durante el render.",
+      },
+      {
+        type: "list",
+        items: [
+          "El cuerpo del componente debe ser puro: solo describir la UI.",
+          "El array de dependencias le dice a React cuándo volver a ejecutarse.",
+          "La función de limpieza (return) se ejecuta al desmontarse el componente o antes de la siguiente ejecución del efecto.",
+        ],
+      },
+      {
+        type: "subtitle", text: "Optimización de renders — memo y callbacks"
+      },
+      {
+        type: "table",
+        headers: ["Herramienta", "Qué hace"],
+        rows: [
+          ["React.memo", "Evita que un componente se re-renderice si sus props no cambiaron."],
+          ["useMemo", "Memoriza el resultado de un cálculo costoso para no repetirlo en cada render."],
+          ["useCallback", "Mantiene estable la identidad de una función entre renders para no disparar re-renders en hijos."],
+        ],
+      },
+      {
+        type: "callout",
+        text: "Re-renderizar es barato pero no gratis. Con servicios de infraestructura como Firebase o Amplify que cobran por lectura, un componente que se re-renderiza de más puede generar costos inesperados en producción.",
+      },
+      {
+        type: "subtitle", text: "Qué dispara un re-render"
+      },
+      {
+        type: "list",
+        items: [
+          "Cambió el estado interno del componente (setState / useState setter).",
+          "El componente padre le pasó nuevas props.",
+          "El componente padre se re-renderizó — por defecto los hijos también lo hacen, aunque sus props no hayan cambiado.",
+        ],
+      },
+      {
+        type: "subtitle", text: "Re-render vs Re-montaje"
+      },
+      {
+        type: "table",
+        headers: ["", "Re-render", "Re-montaje"],
+        rows: [
+          ["Cuándo ocurre", "Cambió estado o props", "Cambió la posición en el árbol o la key"],
+          ["Estado", "Se conserva", "Se pierde — vuelve al inicial"],
+          ["Costo", "Bajo", "Alto"],
+        ],
+      },
+      {
+        type: "subtitle", text: "Fabric en detalle — las 3 fases del pipeline"
+      },
+      {
+        type: "steps",
+        items: [
+          "Render (hilo JS): React ejecuta los componentes y produce el árbol de elementos. El renderizador crea el Shadow Tree (árbol de sombra) equivalente, escrito en C++.",
+          "Commit (hilo de fondo): se promueve el nuevo árbol, se calcula el layout con Yoga (Flexbox en C++). Se compara con el árbol anterior (tree diff) y se genera la lista mínima de operaciones.",
+          "Mount (hilo UI): se aplica la lista de operaciones sobre el árbol de vistas nativas reales. Se dibujan los píxeles en pantalla. Solo este hilo puede tocar las vistas.",
+        ],
+      },
+      {
+        type: "subtitle", text: "Shadow Tree — árbol de sombra"
+      },
+      {
+        type: "text",
+        text: "Copia de la UI escrita en C++, creada durante la fase de render. Almacena las props y estilos de cada componente sin el peso de una vista completa. Es inmutable: para actualizar la UI no se modifica el árbol existente sino que se crea uno nuevo.",
+      },
+      {
+        type: "callout",
+        text: "C++ se usa porque es multiplataforma, rapidísimo y liviano. El mismo árbol de sombra funciona tanto en Android como en iOS.",
+      },
+      {
+        type: "subtitle", text: "Yoga — motor de layout"
+      },
+      {
+        type: "definition",
+        term: "Yoga",
+        text: "Motor de layout escrito en C++ que implementa las reglas de Flexbox. Calcula posición, tamaño y espaciado de cada elemento. Por eso el layout de React Native se parece tanto al CSS de la web — usan el mismo modelo de Flexbox.",
+      },
+      {
+        type: "subtitle", text: "CodeGen"
+      },
+      {
+        type: "definition",
+        term: "CodeGen",
+        text: "Herramienta que a partir de definiciones tipadas en TypeScript genera automáticamente el código de 'pegamento' entre JavaScript y el código nativo. Convierte errores de tipo en tiempo de compilación en lugar de en runtime, haciendo la comunicación entre ambos lados más segura.",
+      },
+      {
+        type: "subtitle", text: "Modelo de hilos"
+      },
+      {
+        type: "table",
+        headers: ["Hilo", "Responsabilidad", "Tecnología"],
+        rows: [
+          ["Hilo JS", "Lógica, estado, render de React, reconciliación.", "Hermes (motor JS de Meta)"],
+          ["Hilo de fondo", "Cálculo de layout (Yoga), construcción del Shadow Tree.", "C++ / Fabric"],
+          ["Hilo UI", "Vistas nativas reales, píxeles en pantalla, respuesta a gestos.", "Android/iOS nativo"],
+        ],
+      },
+      {
+        type: "callout",
+        text: "Regla de oro: nunca bloquear el hilo UI. Es el único que puede dibujar y responder a toques. Si se lo mantiene ocupado con trabajo pesado, la app se congela. Las animaciones deben correr en el hilo nativo (60/120 fps), no depender del hilo JS.",
+      },
+    ],
+  },
 ];
 
 
