@@ -9,6 +9,7 @@ const sections = [
   {
     id: "intro",
     number: "01",
+    group: "Redes",
     title: "¿Qué es una red?",
     color: "#00d4ff",
     content: [
@@ -38,6 +39,7 @@ const sections = [
   {
     id: "dispositivos",
     number: "02",
+    group: "Redes",
     title: "Dispositivos de red",
     color: "#ff6b35",
     content: [
@@ -92,6 +94,7 @@ const sections = [
   {
     id: "switch-router",
     number: "03",
+    group: "Redes",
     title: "Switch y Router en detalle",
     color: "#a855f7",
     content: [
@@ -181,6 +184,7 @@ const sections = [
   {
     id: "medios",
     number: "04",
+    group: "Redes",
     title: "Medios de transmisión",
     color: "#10b981",
     content: [
@@ -243,6 +247,7 @@ const sections = [
   {
     id: "protocolos",
     number: "05",
+    group: "Redes",
     title: "Protocolos de comunicación",
     color: "#f59e0b",
     content: [
@@ -283,6 +288,7 @@ const sections = [
   {
     id: "osi",
     number: "06",
+    group: "Redes",
     title: "Modelo OSI (7 capas)",
     color: "#ec4899",
     content: [
@@ -348,6 +354,7 @@ const sections = [
   {
     id: "encapsulacion",
     number: "07",
+    group: "Redes",
     title: "Encapsulación y Desencapsulación",
     color: "#06b6d4",
     content: [
@@ -396,6 +403,7 @@ const sections = [
   {
     id: "firewall",
     number: "08",
+    group: "Redes",
     title: "Firewalls y Seguridad",
     color: "#ef4444",
     content: [
@@ -437,6 +445,7 @@ const sections = [
   {
     id: "ipv4",
     number: "09",
+    group: "Redes",
     title: "IP versión 4 – Fundamentos",
     color: "#84cc16",
     content: [
@@ -496,6 +505,7 @@ const sections = [
   {
     id: "cidr",
     number: "10",
+    group: "Redes",
     title: "Notación CIDR y Clases",
     color: "#f97316",
     content: [
@@ -560,6 +570,7 @@ const sections = [
   {
     id: "ips-especiales",
     number: "11",
+    group: "Redes",
     title: "IPs reservadas y privadas",
     color: "#a78bfa",
     content: [
@@ -602,6 +613,7 @@ const sections = [
   {
     id: "subnetting",
     number: "12",
+    group: "Redes",
     title: "Subnetting – Subdivisión de redes",
     color: "#fb7185",
     content: [
@@ -659,6 +671,7 @@ const sections = [
   {
     id: "ux-ui-intro",
     number: "13",
+    group: "UX / UI",
     title: "UX vs UI – Conceptos fundamentales",
     color: "#e879f9",
     content: [
@@ -725,6 +738,7 @@ const sections = [
   {
     id: "ux-leyes",
     number: "14",
+    group: "UX / UI",
     title: "Leyes y principios de UX",
     color: "#38bdf8",
     content: [
@@ -792,6 +806,7 @@ const sections = [
   {
     id: "design-thinking",
     number: "15",
+    group: "UX / UI",
     title: "Design Thinking y Doble Diamante",
     color: "#fb923c",
     content: [
@@ -851,6 +866,7 @@ const sections = [
   {
     id: "ux-investigacion",
     number: "16",
+    group: "UX / UI",
     title: "Investigación UX – Métodos y herramientas",
     color: "#4ade80",
     content: [
@@ -937,6 +953,7 @@ const sections = [
   {
     id: "ejercicios",
     number: "17",
+    group: "Ejercicios",
     title: "Ejercicios prácticos",
     color: "#22c55e",
     content: [
@@ -1127,6 +1144,7 @@ const sections = [
   {
     id: "ejerciciosSubnetLab",
     number: "18",
+    group: "Ejercicios",
     title: "Ejercicios – SubnetLab",
     color: "#c8ff00",
     content: [{ type: "tool" }],
@@ -1134,6 +1152,7 @@ const sections = [
   {
     id: "react-native",
     number: "19",
+    group: "React Native",
     title: "React Native – Introducción y ecosistema",
     color: "#f97316",
     content: [
@@ -1259,6 +1278,7 @@ const sections = [
   {
     id: "react-native-setup",
     number: "20",
+    group: "React Native",
     title: "React Native – Arquitectura y entorno",
     color: "#10b981",
     content: [
@@ -1371,6 +1391,7 @@ const sections = [
   {
     id: "react-native-proyecto",
     number: "21",
+    group: "React Native",
     title: "React Native – Estructura del proyecto",
     color: "#a855f7",
     content: [
@@ -1502,6 +1523,7 @@ const sections = [
   {
     id: "react-native-arquitectura",
     number: "22",
+    group: "React Native",
     title: "React Native – Arquitectura interna profunda",
     color: "#f97316",
     content: [
